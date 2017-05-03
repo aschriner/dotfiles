@@ -1,0 +1,12 @@
+.pydevproject
+.project
+.settings
+.externalToolBuilders/
+*.pyc
+.DS_STORE
+.env
+manage
+*.json
+*.csv
+*.ipynb
+.local_dev/*
