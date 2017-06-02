@@ -105,6 +105,14 @@ alias gitprr=PRreview
 alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force-with-lease"
 
+tarhelp() {
+    echo "tar usage hints:"
+    echo "1) Create archive: tar -cvzf <output_filename.gz> path/to/stuff/*.py"
+    echo "Will create an archive starting at path/; maybe try 'cd path/to/stuff' first"
+    echo "2) Unzip archive: tar -xvf <archive_file> file_to_unzip_to"
+    echo "options: (c)reate (v)erbose g(z)ip (f)ile e(x)tract"
+}
+
 plugins=(python zsh-syntax-highlighting)
 
 #python autoenv
