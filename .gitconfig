@@ -4,12 +4,13 @@
 [core]
 	excludesfile = ~/.gitignore
 	editor = /usr/bin/vim
+	hooksPath = ~/.githooks
 
 [grep]
 	linenumber = true
 [alias]
-        lol = log --graph --decorate --pretty=oneline --abbrev-commit
-        lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+    lol = log --graph --decorate --pretty=oneline --abbrev-commit
+    lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
 	co = checkout
 	where = !git reflog | ggrep -P \"(?<=checkout: moving from) ([^\\s]+)\" --color=always |less
 	unstage = reset HEAD --
@@ -17,10 +18,10 @@
 	cm = checkout master
     amendforce = !git add -u && git commit --amend --no-edit && git push origin HEAD --force-with-lease
 [color]
-        branch = auto
-        diff = auto
-        interactive = auto
-        status = auto
+    branch = auto
+    diff = auto
+    interactive = auto
+    status = auto
 [credential]
 	helper = osxkeychain
 [rerere]

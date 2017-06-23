@@ -1,0 +1,3 @@
+echo "Executing post-checkout hook..."
+echo "1. Deleting *.pyc files - you'll thank me later"
+find . -name "*\.pyc" -delete
