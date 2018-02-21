@@ -92,9 +92,8 @@ source /usr/local/bin/virtualenvwrapper.sh
 #autocompletion
 autoload -Uz compinit && compinit
 
-#alias stuff
+# aliases
 alias gcm="git checkout master"
-alias ffas="echo \"grep -rl candidateInfo . | xargs sed 's/candidateInfo/orgCandidateInfo/g' | grep orgCandidateInfo\""
 
 PRreview() {
     git remote update origin && git checkout $1
@@ -105,6 +104,26 @@ alias gitprr=PRreview
 alias gpoh="git push origin HEAD"
 alias gpohf="git push origin HEAD --force-with-lease"
 
+gRecent() {
+    git reflog -n100 --pretty='%cr|%gs' --grep-reflog='checkout: moving' HEAD | {
+      seen=":"
+      git_dir="$(git rev-parse --git-dir)"
+      while read line; do
+        date="${line%%|*}"
+        branch="${line##* }"
+        if ! [[ $seen == *:"${branch}":* ]]; then
+          seen="${seen}${branch}:"
+          if [ -f "${git_dir}/refs/heads/${branch}" ]; then
+            printf "%s\t%s\n" "$date" "$branch"
+          fi
+        fi
+      done
+    }
+}
+
+alias grecent="gRecent | less"
+
+
 tarhelp() {
     echo "tar usage hints:"
     echo "1) Create archive: tar -cvzf <output_filename.gz> path/to/stuff/*.py"
@@ -113,7 +132,20 @@ tarhelp() {
     echo "options: (c)reate (v)erbose g(z)ip (f)ile e(x)tract"
 }
 
+getdburl () {
+    heroku config:get DATABASE_URL -a $1
+}
+
 plugins=(python zsh-syntax-highlighting)
+
+
+copy_heroku_var () {
+    ENV_VAR=$1
+    FROM_APP=$2
+    TO_APP=$3
+    heroku config:set $ENV_VAR=$(heroku config:get $ENV_VAR -a $FROM_APP) -a $TO_APP
+}
+
 
 #python autoenv
 source /usr/local/opt/autoenv/activate.sh
