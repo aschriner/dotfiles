@@ -1,10 +1,9 @@
 [user]
     name = Andy Schriner
-    email = andrew@leadgenius.com
+    email = andrew.schriner@udemy.com
 [core]
     excludesfile = ~/.gitignore
     editor = /usr/bin/vim
-    hooksPath = ~/.githooks
 
 [grep]
     linenumber = true
@@ -22,8 +21,6 @@
     diff = auto
     interactive = auto
     status = auto
-[credential]
-    helper = osxkeychain
 [rerere]
     enabled = true
 [format]
